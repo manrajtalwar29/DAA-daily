@@ -1,15 +1,21 @@
 #include <stdio.h>
 
 int removeDuplicates(int arr[], int n) {
-    if (n == 0)
-        return 0;
+    int k = n;
 
-    int k = 1;
+    for (int i = 0; i < k; i++) {
+        for (int j = i + 1; j < k; j++) {
 
-    for (int i = 1; i < n; i++) {
-        if (arr[i] != arr[k - 1]) {
-            arr[k] = arr[i];
-            k++;
+            if (arr[i] == arr[j]) {
+
+                // Shift elements to the left
+                for (int x = j; x < k - 1; x++) {
+                    arr[x] = arr[x + 1];
+                }
+
+                k--;
+                j--;
+            }
         }
     }
 
@@ -17,7 +23,7 @@ int removeDuplicates(int arr[], int n) {
 }
 
 int main() {
-    int arr[] = {1, 1, 2, 3, 3, 3, 4};
+    int arr[] = {3, 1, 2, 3, 2, 4, 1};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     int k = removeDuplicates(arr, n);
